@@ -69,63 +69,60 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
   ListView _list() {
     return ListView.builder(
       itemBuilder: (BuildContext context, int i) {
-        return TarefaWidget(index:i);
+        return ThemeIcon(
+          text: controller.tarefas[i].tarefa,
+        );
       },
       itemCount: controller.tarefas.length,
     );
   }
 }
 
-class TarefaWidget extends StatefulWidget {
-  final int? index;
-  TarefaWidget({Key? key, this.index}) : super(key: key);
+class ThemeIcon extends StatefulWidget {
+  final String? text;
+  const ThemeIcon({Key? key, this.text}) : super(key: key);
 
   @override
-  _TarefaWidgetState createState() => _TarefaWidgetState();
+  _ThemeIconState createState() => _ThemeIconState();
 }
 
-class _TarefaWidgetState extends State<TarefaWidget> {
-  HomePageController controller = HomePageController();
-
+class _ThemeIconState extends State<ThemeIcon> {
+  bool click = false;
   @override
   Widget build(BuildContext context) {
-  bool click = true;
-  int w = 0;
     return Container(
-    margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
-    padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
-    decoration:
-        BoxDecoration(border: Border.all(color: Colors.black38, width: 2)),
-    child: InkWell(
-      onTap: () {
-        setState(() {
-          click = !click;
-          w += 1;
-        });
-        print(click);
-        print(w);
-      },
-      child: ListTile(
-        title: Text(
-          controller.tarefas[i].tarefa!,
-          style: const TextStyle(
-            fontSize: 24,
+      margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
+      decoration: BoxDecoration(
+          border:
+              Border.all(color: click ? Colors.green : Colors.red, width: 2)),
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            click = !click;
+          });
+        },
+        child: ListTile(
+          title: Text(
+            widget.text!,
+            style: const TextStyle(
+              fontSize: 24,
+            ),
           ),
-        ),
-        trailing: Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.green, width: 3),
-            shape: BoxShape.circle,
-          ),
-          child: Icon(
-            click ? Icons.check : Icons.close,
-            size: 40,
-            color: click ? Colors.green : Colors.red,
+          trailing: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                  color: click ? Colors.green : Colors.red, width: 3),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              click ? Icons.check : Icons.close,
+              size: 40,
+              color: click ? Colors.green : Colors.red,
+            ),
           ),
         ),
       ),
-    ),);
-
-// Container tarefaMethod
-//   );
-// }
+    );
+  }
+}
