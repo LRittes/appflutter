@@ -1,4 +1,5 @@
-import './telas/tela_principal.dart';
+import 'package:ativ4/screens/home.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -7,8 +8,8 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: "hello world",
-      home: TelaPrincipal(),
+      title: "atividade 8",
+      home: Home(),
       debugShowCheckedModeBanner: false,
     );
   }
