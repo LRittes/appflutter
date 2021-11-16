@@ -1,18 +1,14 @@
-import 'package:ativ4/screens/Home/index.dart';
+import 'package:ativ4/screens/home.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class App extends StatefulWidget {
+class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
   @override
-  _AppState createState() => _AppState();
-}
-
-class _AppState extends State<App> {
-  @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: "Projeto final",
+      title: "atividade 8",
       home: Home(),
       debugShowCheckedModeBanner: false,
     );
