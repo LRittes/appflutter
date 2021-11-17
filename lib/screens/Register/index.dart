@@ -1,4 +1,6 @@
 import 'package:ativ4/controllers/controller.dart';
+import 'package:ativ4/controllers/list_items.dart';
+import 'package:ativ4/screens/Home/index.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
@@ -10,11 +12,22 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   RegisterController controller = RegisterController();
+  NameController controllerName = NameController();
+  CategoryController controllerCategory = CategoryController();
+  PriceController controllerPrice = PriceController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: ElevatedButton(
+          child: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) {
+              return const Home();
+            }));
+          },
+        ),
         title: const Text('Cadastrar item'),
         centerTitle: true,
         backgroundColor: Colors.deepOrangeAccent,
@@ -28,47 +41,52 @@ class _RegisterState extends State<Register> {
             children: [
               const Text(
                 'Categoria',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
               ),
               TextField(
-                controller: controller.boxItems,
+                controller: controllerCategory.boxCategory,
                 decoration: const InputDecoration(
                     hintText: 'ex: bebida...',
-                    hintStyle: TextStyle(fontSize: 22)),
+                    hintStyle: TextStyle(fontSize: 21)),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 16),
+                margin: const EdgeInsets.only(top: 10),
                 child: const Text(
                   'Nome:',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
                 ),
               ),
               TextField(
-                controller: controller.boxItems,
+                controller: controllerName.boxName,
                 decoration: const InputDecoration(
                     hintText: 'ex: banana...',
                     hintStyle: TextStyle(fontSize: 22)),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 16),
+                margin: const EdgeInsets.only(top: 10),
                 child: const Text(
                   'Preço',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
                 ),
               ),
               TextField(
-                controller: controller.boxItems,
+                controller: controllerPrice.boxPrice,
                 decoration: const InputDecoration(
                     hintText: 'ex: R\$ 9,90',
                     hintStyle: TextStyle(fontSize: 22)),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 16),
+                margin: const EdgeInsets.only(top: 10),
                 alignment: Alignment.center,
                 child: ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      controller.registerSave();
+                      controller.registerSave(
+                        controllerCategory.boxCategory,
+                        controllerName.fieldName,
+                        controllerPrice.fieldPrice,
+                      );
+                      print(items);
                     });
                   },
                   child: const Text(

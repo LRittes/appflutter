@@ -1,6 +1,6 @@
 class Item {
   String? name;
-  int? value;
+  String? value;
   String? category;
 
   Item({this.category, this.name, this.value});
