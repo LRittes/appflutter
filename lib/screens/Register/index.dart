@@ -1,7 +1,7 @@
-import 'package:ativ4/controllers/controller.dart';
 import 'package:ativ4/controllers/list_items.dart';
 import 'package:ativ4/screens/Home/index.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -11,17 +11,21 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  RegisterController controller = RegisterController();
   NameController controllerName = NameController();
   CategoryController controllerCategory = CategoryController();
   PriceController controllerPrice = PriceController();
 
   @override
   Widget build(BuildContext context) {
+    final Items listItems = Provider.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        leading: ElevatedButton(
-          child: const Icon(Icons.arrow_back),
+        leading: TextButton(
+          child: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
           onPressed: () {
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) {
               return const Home();
@@ -44,7 +48,7 @@ class _RegisterState extends State<Register> {
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
               ),
               TextField(
-                controller: controllerCategory.boxCategory,
+                controller: controllerCategory.fieldCategory,
                 decoration: const InputDecoration(
                     hintText: 'ex: bebida...',
                     hintStyle: TextStyle(fontSize: 21)),
@@ -57,7 +61,7 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               TextField(
-                controller: controllerName.boxName,
+                controller: controllerName.fieldName,
                 decoration: const InputDecoration(
                     hintText: 'ex: banana...',
                     hintStyle: TextStyle(fontSize: 22)),
@@ -70,7 +74,8 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               TextField(
-                controller: controllerPrice.boxPrice,
+                controller: controllerPrice.fieldPrice,
+                keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
                     hintText: 'ex: R\$ 9,90',
                     hintStyle: TextStyle(fontSize: 22)),
@@ -81,12 +86,11 @@ class _RegisterState extends State<Register> {
                 child: ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      controller.registerSave(
+                      listItems.registerSave(
                         controllerCategory.boxCategory,
                         controllerName.fieldName,
                         controllerPrice.fieldPrice,
                       );
-                      print(items);
                     });
                   },
                   child: const Text(

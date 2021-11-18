@@ -1,8 +1,8 @@
-import 'package:ativ4/controllers/controller.dart';
 import 'package:ativ4/controllers/list_items.dart';
 import 'package:ativ4/models/card_item.dart';
 import 'package:flutter/material.dart';
 import 'package:ativ4/screens/Register/index.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -12,10 +12,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  RegisterController controller = RegisterController();
-
   @override
   Widget build(BuildContext context) {
+    final Items listItems = Provider.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Lista de compras'),
@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
             icon: const Icon(Icons.close),
             onPressed: () {
               setState(() {
-                print(items);
+                print(listItems.items);
               });
             },
           )
@@ -57,15 +57,18 @@ class _HomeState extends State<Home> {
   }
 
   ListView list() {
+    final Items listItems = Provider.of(context);
+
     return ListView.builder(
       itemBuilder: (BuildContext context, int i) {
         return CardItem(
-          category: items[i].category,
-          title: items[i].name,
-          price: items[i].value,
+          index: i,
+          category: listItems.items[i].category,
+          title: listItems.items[i].name,
+          price: listItems.items[i].value,
         );
       },
-      itemCount: items.length,
+      itemCount: listItems.count,
     );
   }
 }

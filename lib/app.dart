@@ -1,20 +1,19 @@
+import 'package:ativ4/controllers/list_items.dart';
 import 'package:ativ4/screens/Home/index.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class App extends StatefulWidget {
+class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
   @override
-  _AppState createState() => _AppState();
-}
-
-class _AppState extends State<App> {
-  @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: "Projeto final",
-      home: Home(),
-      debugShowCheckedModeBanner: false,
-    );
+    return ChangeNotifierProvider(
+        create: (ctx) => Items(),
+        child: const MaterialApp(
+          title: "Projeto final",
+          home: Home(),
+          debugShowCheckedModeBanner: false,
+        ));
   }
 }
