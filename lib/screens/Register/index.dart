@@ -12,12 +12,12 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   NameController controllerName = NameController();
-  CategoryController controllerCategory = CategoryController();
   PriceController controllerPrice = PriceController();
+  String? valueItem;
 
   @override
   Widget build(BuildContext context) {
-    final Items listItems = Provider.of(context);
+    final Items provider = Provider.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -47,12 +47,22 @@ class _RegisterState extends State<Register> {
                 'Categoria',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
               ),
-              TextField(
-                controller: controllerCategory.fieldCategory,
-                decoration: const InputDecoration(
-                    hintText: 'ex: bebida...',
-                    hintStyle: TextStyle(fontSize: 21)),
-              ),
+              DropdownButton(
+                  isExpanded: true,
+                  value: valueItem,
+                  style: const TextStyle(fontSize: 18, color: Colors.black),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      valueItem = newValue!;
+                    });
+                  },
+                  items: provider.categories
+                      .map<DropdownMenuItem<String>>((value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList()),
               Container(
                 margin: const EdgeInsets.only(top: 10),
                 child: const Text(
@@ -86,8 +96,8 @@ class _RegisterState extends State<Register> {
                 child: ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      listItems.registerSave(
-                        controllerCategory.boxCategory,
+                      provider.registerSave(
+                        valueItem,
                         controllerName.fieldName,
                         controllerPrice.fieldPrice,
                       );

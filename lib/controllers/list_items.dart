@@ -2,19 +2,14 @@ import 'package:ativ4/models/item.dart';
 import 'package:flutter/cupertino.dart';
 
 class Items extends ChangeNotifier {
-  List<Item> items = [
-    Item(
-      category: 'registredCategory',
-      name: 'registredName',
-      value: 'registredPrice',
-    )
-  ];
+  List<Item> items = [];
+
+  List categories = ['Alimento', 'Bebida', 'Higiene', 'Limpeza'];
 
   void registerSave(boxCategory, boxName, boxPrice) {
-    String registredCategory = boxCategory.text;
+    String registredCategory = boxCategory;
     String registredName = boxName.text;
     String registredPrice = boxPrice.text;
-    boxCategory.clear();
     boxName.clear();
     boxPrice.clear();
 
@@ -34,13 +29,6 @@ class Items extends ChangeNotifier {
 
   int get count {
     return items.length;
-  }
-}
-
-class CategoryController {
-  TextEditingController boxCategory = TextEditingController();
-  get fieldCategory {
-    return boxCategory;
   }
 }
 

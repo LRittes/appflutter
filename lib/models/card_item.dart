@@ -20,9 +20,16 @@ class CardItem extends StatefulWidget {
 }
 
 class _CardItemState extends State<CardItem> {
+  List imgCard = [
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6TeiWp-y_jxH9camU-9AQoyMJkkfGYGdLwQ&usqp=CAU',
+    'https://www.clipartmax.com/png/full/101-1011625_aluminum-bank-beverage-cartoon-drink-soda-icon-soft-drinks-png-cartoon.png',
+    'https://www.pinpng.com/pngs/m/247-2477038_personal-hygiene-products-clipart-hd-png-download.png',
+    'https://i.pinimg.com/564x/c7/b7/d7/c7b7d73f623bc6d59582e00eb09a1c3e.jpg'
+  ];
   @override
   Widget build(BuildContext context) {
-    final Items listItems = Provider.of(context);
+    final Items provider = Provider.of(context);
+
     return Container(
       margin: const EdgeInsets.symmetric(
         vertical: 8,
@@ -33,12 +40,21 @@ class _CardItemState extends State<CardItem> {
           borderRadius: const BorderRadius.all(Radius.circular(10))),
       child: InkWell(
         child: ListTile(
+          leading: CircleAvatar(
+            backgroundColor: Colors.white,
+            child: Container(
+              width: 200,
+              child: Image.network(
+                  imgCard[provider.categories.indexOf(widget.category)]),
+            ),
+            radius: 20,
+          ),
           title: Text(
             widget.title!,
             style: const TextStyle(fontSize: 24),
           ),
           subtitle: Text(
-            widget.price!,
+            'R\$ ${widget.price!}',
             style: const TextStyle(fontSize: 16),
           ),
           trailing: TextButton(
