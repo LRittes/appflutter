@@ -48,6 +48,7 @@ class _RegisterState extends State<Register> {
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
               ),
               DropdownButton(
+                  hint: const Text('Escolha uma categoria'),
                   isExpanded: true,
                   value: valueItem,
                   style: const TextStyle(fontSize: 18, color: Colors.black),
@@ -75,6 +76,7 @@ class _RegisterState extends State<Register> {
                 decoration: const InputDecoration(
                     hintText: 'ex: banana...',
                     hintStyle: TextStyle(fontSize: 22)),
+                style: const TextStyle(fontSize: 22),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 10),
@@ -89,6 +91,7 @@ class _RegisterState extends State<Register> {
                 decoration: const InputDecoration(
                     hintText: 'ex: R\$ 9,90',
                     hintStyle: TextStyle(fontSize: 22)),
+                style: const TextStyle(fontSize: 22),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 10),

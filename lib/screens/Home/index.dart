@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:ativ4/controllers/list_items.dart';
 import 'package:ativ4/models/card_item.dart';
-import 'package:flutter/material.dart';
 import 'package:ativ4/screens/Register/index.dart';
 import 'package:provider/provider.dart';
 
@@ -14,11 +14,24 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    final Items listItems = Provider.of(context);
+    final Items provider = Provider.of(context);
+    var listItem = provider.items.toList().isNotEmpty
+        ? provider.items.map((e) => double.parse(e.value!))
+        : null;
+    var valorTotalInt = listItem != null
+        ? listItem.reduce((prev, nxt) => prev + nxt).toStringAsFixed(2)
+        : 0.0;
+    String tot = valorTotalInt.toString().replaceFirst('.', ',');
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lista de compras'),
+        title: const Text(
+          'Lista de compras',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Colors.deepOrangeAccent,
         actions: [
@@ -27,22 +40,36 @@ class _HomeState extends State<Home> {
             icon: const Icon(Icons.close),
             onPressed: () {
               setState(() {
-                print(listItems.items);
+                provider.deleteAll();
               });
             },
           )
         ],
       ),
-      body: Column(
-        children: [
-          Flexible(
-            child: SizedBox(
-              width: double.infinity,
-              height: double.infinity,
-              child: list(),
+      body: SizedBox(
+        width: double.infinity,
+        child: Flexible(
+          child: SizedBox(
+            width: double.infinity,
+            child: list(),
+          ),
+        ),
+      ),
+      bottomSheet: Container(
+        height: 60,
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+        color: Colors.deepOrangeAccent,
+        child: Center(
+          child: Text(
+            'Valor total: R\$ $tot',
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
             ),
-          )
-        ],
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -56,19 +83,22 @@ class _HomeState extends State<Home> {
     );
   }
 
-  ListView list() {
-    final Items listItems = Provider.of(context);
+  Container list() {
+    final Items provider = Provider.of(context);
 
-    return ListView.builder(
-      itemBuilder: (BuildContext context, int i) {
-        return CardItem(
-          index: i,
-          category: listItems.items[i].category,
-          title: listItems.items[i].name,
-          price: listItems.items[i].value,
-        );
-      },
-      itemCount: listItems.count,
+    return Container(
+      padding: const EdgeInsets.only(bottom: 60),
+      child: ListView.builder(
+        itemBuilder: (BuildContext context, int i) {
+          return CardItem(
+            index: i,
+            category: provider.items[i].category,
+            title: provider.items[i].name,
+            price: provider.items[i].value,
+          );
+        },
+        itemCount: provider.count,
+      ),
     );
   }
 }

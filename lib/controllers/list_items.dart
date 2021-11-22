@@ -27,6 +27,10 @@ class Items extends ChangeNotifier {
     notifyListeners();
   }
 
+  deleteAll() {
+    return items.clear();
+  }
+
   int get count {
     return items.length;
   }
