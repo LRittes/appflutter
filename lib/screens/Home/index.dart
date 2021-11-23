@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ativ4/controllers/list_items.dart';
+import 'package:ativ4/controllers/provider_items.dart';
 import 'package:ativ4/models/card_item.dart';
 import 'package:ativ4/screens/Register/index.dart';
 import 'package:provider/provider.dart';
@@ -15,13 +15,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final Items provider = Provider.of(context);
-    var listItem = provider.items.toList().isNotEmpty
-        ? provider.items.map((e) => double.parse(e.value!))
-        : null;
-    var valorTotalInt = listItem != null
-        ? listItem.reduce((prev, nxt) => prev + nxt).toStringAsFixed(2)
-        : 0.0;
-    String tot = valorTotalInt.toString().replaceFirst('.', ',');
 
     return Scaffold(
       appBar: AppBar(
@@ -49,10 +42,7 @@ class _HomeState extends State<Home> {
       body: SizedBox(
         width: double.infinity,
         child: Flexible(
-          child: SizedBox(
-            width: double.infinity,
-            child: list(),
-          ),
+          child: list(),
         ),
       ),
       bottomSheet: Container(
@@ -62,7 +52,7 @@ class _HomeState extends State<Home> {
         color: Colors.deepOrangeAccent,
         child: Center(
           child: Text(
-            'Valor total: R\$ $tot',
+            'Valor total: R\$ ${provider.totValue}',
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
