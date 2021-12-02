@@ -12,6 +12,21 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  SnackBar snackBarDeleteAll = SnackBar(
+    content: const Text(
+      "Todos items deletados",
+      style: TextStyle(fontSize: 18),
+    ),
+    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+    duration: const Duration(seconds: 1),
+    action: SnackBarAction(
+      label: "Desfazer",
+      onPressed: () {},
+      textColor: Colors.black,
+    ),
+    backgroundColor: Colors.blueAccent,
+  );
+
   @override
   Widget build(BuildContext context) {
     final Items provider = Provider.of(context);
@@ -33,6 +48,7 @@ class _HomeState extends State<Home> {
             icon: const Icon(Icons.close),
             onPressed: () {
               setState(() {
+                ScaffoldMessenger.of(context).showSnackBar(snackBarDeleteAll);
                 provider.deleteAll();
               });
             },

@@ -24,6 +24,21 @@ class _CardItemState extends State<CardItem> {
   Widget build(BuildContext context) {
     final Items provider = Provider.of(context);
 
+    SnackBar snackBarDeleteOne = SnackBar(
+      content: const Text(
+        "Item deletado",
+        style: TextStyle(fontSize: 18),
+      ),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      duration: const Duration(seconds: 1),
+      action: SnackBarAction(
+        label: "Desfazer",
+        onPressed: () {},
+        textColor: Colors.black,
+      ),
+      backgroundColor: Colors.blueAccent,
+    );
+
     return Container(
       margin: const EdgeInsets.symmetric(
         vertical: 8,
@@ -52,6 +67,7 @@ class _CardItemState extends State<CardItem> {
           ),
           trailing: TextButton(
             onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(snackBarDeleteOne);
               Provider.of<Items>(context, listen: false)
                   .deleteItem(widget.index!);
             },
