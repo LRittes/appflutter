@@ -19,6 +19,16 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     final Items provider = Provider.of(context);
 
+    SnackBar snackBarAdd = SnackBar(
+      content: const Text(
+        "Item adicionado",
+        style: TextStyle(fontSize: 18),
+      ),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      duration: const Duration(seconds: 1),
+      backgroundColor: Colors.green,
+    );
+
     return Scaffold(
       appBar: AppBar(
         leading: TextButton(
@@ -98,6 +108,7 @@ class _RegisterState extends State<Register> {
                 alignment: Alignment.center,
                 child: ElevatedButton(
                   onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(snackBarAdd);
                     setState(() {
                       provider.registerSave(
                         valueItem,
