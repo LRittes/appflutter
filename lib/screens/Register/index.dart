@@ -19,13 +19,13 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     final Items provider = Provider.of(context);
 
-    SnackBar snackBarAdd = SnackBar(
-      content: const Text(
+    SnackBar snackBarAdd = const SnackBar(
+      content: Text(
         "Item adicionado",
         style: TextStyle(fontSize: 18),
       ),
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-      duration: const Duration(seconds: 1),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      duration: Duration(seconds: 1),
       backgroundColor: Colors.green,
     );
 

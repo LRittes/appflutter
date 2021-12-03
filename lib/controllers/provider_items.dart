@@ -13,7 +13,7 @@ class Items extends ChangeNotifier {
 
   List imgCard = [
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6TeiWp-y_jxH9camU-9AQoyMJkkfGYGdLwQ&usqp=CAU',
-    'https://www.clipartmax.com/png/full/101-1011625_aluminum-bank-beverage-cartoon-drink-soda-icon-soft-drinks-png-cartoon.png',
+    'https://static.vecteezy.com/system/resources/previews/000/388/056/original/vector-illustration-of-a-beverage-cup.jpg',
     'https://www.pinpng.com/pngs/m/247-2477038_personal-hygiene-products-clipart-hd-png-download.png',
     'https://i.pinimg.com/564x/c7/b7/d7/c7b7d73f623bc6d59582e00eb09a1c3e.jpg'
   ];
@@ -64,6 +64,7 @@ class Items extends ChangeNotifier {
 
   String showImg(String category) {
     return imgCard[categories.indexOf(category)];
+    //     imgCard[0]
   }
 }
 
