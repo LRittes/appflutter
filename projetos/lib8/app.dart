@@ -1,4 +1,4 @@
-import 'package:ativ4/screens/home.dart';
+import 'package:ativ4/screens/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
