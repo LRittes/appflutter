@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ativ4/apis/notification_api.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:sensors/sensors.dart';
@@ -16,6 +17,7 @@ class _HomeState extends State<Home> {
   UserAccelerometerEvent? userAccelerometer;
   GyroscopeEvent? gyroscope;
   LocationData? location;
+  DateTime? dateTime;
 
   List<StreamSubscription> inscricoes = [];
 
@@ -31,6 +33,12 @@ class _HomeState extends State<Home> {
     });
   }
 
+  void listenNotification() {
+    NotificationApi.onNotification.stream.listen((event) {
+      if (event == 'Agendar') {}
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -41,6 +49,8 @@ class _HomeState extends State<Home> {
       });
     }));
     inscricoes.add(Location.instance.onLocationChanged.listen(listenLocation));
+    NotificationApi.init();
+    listenNotification();
   }
 
   @override
@@ -51,22 +61,19 @@ class _HomeState extends State<Home> {
         centerTitle: true,
       ),
       body: Center(
-        child: Column(
-          children: [
-            ElevatedButton(
-              child: Text('Agendar'),
-              onPressed: () {},
-            ),
-            accelerometer != null
-                ? Text(
-                    "Data:  \nlat: ${location!.latitude} log: ${location!.longitude}",
-                    style: const TextStyle(fontSize: 24),
-                  )
-                : const Text(
-                    'Sem dados',
-                    style: TextStyle(fontSize: 24),
-                  )
-          ],
+        child: ElevatedButton(
+          child: const Text('Agendar'),
+          onPressed: () {
+            dateTime = DateTime.now();
+            NotificationApi.scheduleNotification(
+              id: 0,
+              payload: 'agendar',
+              title: 'Localização á 10s atrás',
+              body:
+                  "Data: $dateTime Lat: ${location!.latitude} Long: ${location!.longitude}",
+              data: DateTime.now().add(const Duration(seconds: 10)),
+            );
+          },
         ),
       ),
     );

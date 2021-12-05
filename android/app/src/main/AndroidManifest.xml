@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ativ4">
    <application
-        android:label="ativ4"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Curso Flutter"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
