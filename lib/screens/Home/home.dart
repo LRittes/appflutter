@@ -5,9 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   SharedPreferences? sharedPreferences;
-  Home({Key? key}) : super(key: key) {
-    SharedPreferences.getInstance().then((value) => sharedPreferences = value);
-  }
+  Home({Key? key}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
@@ -15,9 +13,27 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   ImagePicker imagePicker = ImagePicker();
+  Image? image;
+
+  @override
+  void initState() {
+    super.initState();
+    SharedPreferences.getInstance().then((value) {
+      widget.sharedPreferences = value;
+      String? img = widget.sharedPreferences!.getString('img');
+      img != null
+          ? setState(() {
+              image = decode(img);
+            })
+          : null;
+    });
+  }
 
   Future<String> encode(XFile image) async {
     var bytes = await image.readAsBytes();
+    setState(() {
+      this.image = Image.memory(bytes);
+    });
     String result = base64.encode(bytes);
     return result;
   }
@@ -30,13 +46,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    Image? image = //widget.sharedPreferences != null
-        // ?
-        decode(
-      widget.sharedPreferences!.getString('img'),
-    );
-    // : null;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Colocando image'),
@@ -45,11 +54,12 @@ class _HomeState extends State<Home> {
       body: Center(
         child: Container(
           margin: const EdgeInsets.all(16),
-          child: image ??
-              const Text(
-                'Insira uma imagem',
-                style: TextStyle(fontSize: 22),
-              ),
+          child: image != null
+              ? image
+              : Text(
+                  'Insira uma imagem',
+                  style: TextStyle(fontSize: 22),
+                ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

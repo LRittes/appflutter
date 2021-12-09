@@ -70,8 +70,8 @@ class _HomeState extends State<Home> {
               payload: 'agendar',
               title: 'Localização á 10s atrás',
               body:
-                  "Data: $dateTime Lat: ${location!.latitude} Long: ${location!.longitude}",
-              data: DateTime.now().add(const Duration(seconds: 10)),
+                  "Data: $dateTime \n Lat: ${location!.latitude} Long: ${location!.longitude}",
+              data: DateTime.now().add(const Duration(seconds: 1)),
             );
           },
         ),
