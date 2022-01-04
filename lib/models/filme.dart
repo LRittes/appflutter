@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
+
 class Filme {
   int? id;
   String? name;
   String? sinopse;
-  int? duracaoMinutos;
+  String? duracaoMinutos;
   bool? maior18;
 
   Filme({this.id, this.name, this.sinopse, this.duracaoMinutos, this.maior18});

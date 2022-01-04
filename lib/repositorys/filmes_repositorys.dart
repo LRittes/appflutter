@@ -23,7 +23,7 @@ class FilmesRepositorys {
   }
 
   Future<void> insert(Filme filme) async {
-    await BancoDeDados().db!.rawQuery(sqlSelectAll,
+    await BancoDeDados().db!.rawQuery(sqlInsert,
         [filme.name, filme.sinopse, filme.duracaoMinutos, filme.maior18]);
   }
 
