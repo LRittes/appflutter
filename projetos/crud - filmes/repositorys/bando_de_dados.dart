@@ -12,7 +12,7 @@ class BancoDeDados {
 
   Future<void> onCreate(Database db, int version) async {
     db.execute(
-        'CREATE TABLE filmes (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, sinopse TEXT, duracaoMinutos INTEGER, maior18 BLOB)');
+        'CREATE TABLE filmes (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, sinopse TEXT, duracaoMinutos TEXT, maior18 BLOB)');
   }
 
   Future<void> openDB() async {

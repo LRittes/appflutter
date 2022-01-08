@@ -1,4 +1,4 @@
-import 'package:ativ4/screens/home.dart';
+import 'package:ativ4/screens/Home/home.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -7,7 +7,6 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "CRUD Filmes",
       home: Home(),
       debugShowCheckedModeBanner: false,
     );

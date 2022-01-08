@@ -1,6 +1,6 @@
-import 'package:ativ4/models/filme.dart';
-import 'package:ativ4/repositorys/filmes_repositorys.dart';
 import 'package:flutter/material.dart';
+import 'package:test/models/filme.dart';
+import 'package:test/repositorys/filmes_repositorys.dart';
 
 class RegisterMovieController {
   List<Filme> filmes = [];

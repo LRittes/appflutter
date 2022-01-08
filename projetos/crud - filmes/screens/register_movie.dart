@@ -1,5 +1,5 @@
-import 'package:ativ4/controllers/register_movie_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:test/controllers/register_movie_controller.dart';
 
 class RegisterMovie extends StatefulWidget {
   const RegisterMovie({Key? key}) : super(key: key);

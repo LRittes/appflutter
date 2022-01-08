@@ -5,7 +5,7 @@ class Filme {
   String? name;
   String? sinopse;
   String? duracaoMinutos;
-  bool? maior18;
+  dynamic maior18;
 
   Filme({this.id, this.name, this.sinopse, this.duracaoMinutos, this.maior18});
 

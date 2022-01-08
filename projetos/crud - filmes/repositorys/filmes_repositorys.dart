@@ -1,5 +1,5 @@
-import 'package:ativ4/models/filme.dart';
-import 'package:ativ4/repositorys/bando_de_dados.dart';
+import 'package:test/models/filme.dart';
+import 'package:test/repositorys/bando_de_dados.dart';
 
 class FilmesRepositorys {
   final String sqlSelectAll = 'SELECT * FROM filmes';
